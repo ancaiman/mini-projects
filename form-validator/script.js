@@ -8,31 +8,50 @@ const confirmPassword = document.querySelector('#confirm_password');
 const borderRed = '#E74C3C';
 const borderGreen = '#2ECC71';
 
-function showMessage(input, inputBorderColor, element, elementMessage, elementStyle) {
+function showMessage(input, inputBorderColor, message, messageStyle) {
   const formItem = input.parentElement;
   input.style.borderColor = inputBorderColor;
-  element.className = elementStyle;
-  element.innerText = elementMessage;
-  formItem.append(element);
+
+  const small = formItem.lastElementChild;
+  small.innerText = message;
+  small.className = messageStyle;
 }
 
 function checkLength(input, min, max) {
-  const note = document.createElement('span');
   const inputLength = input.value.length;
   if (inputLength < min) {
-    showMessage(input, borderRed, note, `${input.name} must be at least ${min} characters`, 'bad-text');
+    showMessage(input, borderRed, `${input.name} must be at least ${min} characters`, 'bad-message');
   } else if (inputLength > max) {
-    showMessage(input, borderRed, note, `${input.name} must be less than ${max} characters`, 'bad-text');
+    showMessage(input, borderRed, `${input.name} must be less than ${max} characters`, 'bad-message');
   } else {
-    showMessage(input, borderGreen, note, '', '');
+    showMessage(input, borderGreen, '', '');
   }
 }
 
+function checkEmail(input) {
+  const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (regex.test(input.value.trim())) {
+    showMessage(input, borderGreen, '', '');
+  } else {
+    showMessage(input, borderRed, `email is not valid`, 'bad-message');
+  }
+}
+
+function checkPasswords(input, confirmInput) {
+  if (input.value !== confirmInput.value) {
+    showMessage(confirmInput, borderRed, `passwords do not match`, 'bad-message');
+  } else if (confirmInput.value === '') {
+    showMessage(confirmInput, borderRed, `passwords can't be empty`, 'bad-message');
+  } else {
+    showMessage(confirmInput, borderGreen, '', '');
+  }
+}
 
 submitForm.addEventListener('submit', function(event) {
-  // Submit обновляет страницу, чтобы это предотвратить использую метод preventDefault
   event.preventDefault();
 
   checkLength(username, 3, 15);
   checkLength(password, 6, 25);
+  checkEmail(email);
+  checkPasswords(password, confirmPassword);
 })
