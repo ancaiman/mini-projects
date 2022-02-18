@@ -88,19 +88,15 @@ body {
   font-size: 2em;
 }
 
-@media only screen
-  and (min-device-width: 375px)
-  and (max-device-width: 812px)
-  and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: portrait) {
-    html {
-      overflow: hidden; 
-    }
+@media (max-width: 767px) {
+  html {
+    overflow: hidden; 
+  }
 
-    body {
-      height: 100%;
-      position: fixed;
-      overflow-y: scroll;
-      -webkit-overflow-scrolling: touch;
-    }
+  body {
+    height: 100%;
+    position: fixed;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
 }
