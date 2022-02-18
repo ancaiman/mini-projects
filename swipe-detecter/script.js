@@ -16,10 +16,10 @@ const arrayColors = [
 ]
 const styleRoot = document.querySelector(':root');
 const fieldText = document.querySelector('.field-text');
-const randomNumber = Math.floor(Math.random() * arrayColors.length);
 
 
-function addColorToVar() {
+function setColorToVar() {
+  const randomNumber = Math.floor(Math.random() * arrayColors.length);
   styleRoot.style.setProperty('--border-color', arrayColors[randomNumber]);
 }
 
@@ -29,9 +29,16 @@ function addText() {
 
 function clearText() {
   fieldText.innerText = '';
+
 }
 
-document.addEventListener('DOMContentLoaded', addColorToVar);
+document.addEventListener('DOMContentLoaded', setColorToVar);
 document.addEventListener('touchmove', addText);
 
-setTimeout(() => {clearText()}, 2000);
+setTimeout(function run() {
+  if (fieldText.innerText !== '') {
+    clearText();
+    setColorToVar();
+  }
+  setTimeout(run, 2000);
+}, 2000);

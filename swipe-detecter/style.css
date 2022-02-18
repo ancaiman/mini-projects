@@ -76,7 +76,7 @@ body {
 /* end styles reset */
 
 .swipe-field {
-  border: 10px solid var(--border-color);
+  border: 20px solid var(--border-color);
   width: 100vw;
   height: 100vh;
   display: flex;
