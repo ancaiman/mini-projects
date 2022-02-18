@@ -65,12 +65,19 @@ img {
   width: 100%;
 }
 
+html {
+  overflow: hidden; 
+}
+
 body {
   color: #000;
   font-family: 'Open Sans', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 /* end styles reset */
 
@@ -85,17 +92,4 @@ body {
 
 .field-text {
   font-size: 2em;
-}
-
-@media (max-width: 767px) {
-  html {
-    overflow: hidden; 
-  }
-
-  body {
-    height: 100%;
-    position: fixed;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-  }
 }
