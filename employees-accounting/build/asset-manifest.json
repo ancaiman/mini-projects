@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "static/css/main.a8a10f8e.css",
-    "main.js": "static/js/main.bc1947f0.js",
-    "index.html": "index.html",
-    "main.a8a10f8e.css.map": "static/css/main.a8a10f8e.css.map",
-    "main.bc1947f0.js.map": "static/js/main.bc1947f0.js.map"
+    "main.css": "https://ancaiman.github.io/mini-projects/employees-accounting/build/static/css/main.a8a10f8e.css",
+    "main.js": "https://ancaiman.github.io/mini-projects/employees-accounting/build/static/js/main.bc1947f0.js",
+    "index.html": "https://ancaiman.github.io/mini-projects/employees-accounting/build/index.html",
+    "main.a8a10f8e.css.map": "https://ancaiman.github.io/mini-projects/employees-accounting/build/static/css/main.a8a10f8e.css.map",
+    "main.bc1947f0.js.map": "https://ancaiman.github.io/mini-projects/employees-accounting/build/static/js/main.bc1947f0.js.map"
   },
   "entrypoints": [
-    "static/css/main.a8a10f8e.css",
-    "static/js/main.bc1947f0.js"
+    "https://ancaiman.github.io/mini-projects/employees-accounting/build/static/css/main.a8a10f8e.css",
+    "https://ancaiman.github.io/mini-projects/employees-accounting/build/static/js/main.bc1947f0.js"
   ]
 }
