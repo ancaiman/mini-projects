@@ -88,4 +88,7 @@
     &:hover {
         transform: translateY(-5px);
     }
+    &:disabled {
+        filter: invert(38%) sepia(15%) saturate(12%) hue-rotate(354deg) brightness(88%) contrast(92%);
+    }
 }
