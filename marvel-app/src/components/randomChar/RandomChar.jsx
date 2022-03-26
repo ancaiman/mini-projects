@@ -1,17 +1,14 @@
 import { useState, useEffect } from "react";
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
-import MarvelService from "../../services/MarvelService";
+import useMarvelService from "../../services/MarvelService";
 
 import "./randomChar.scss";
 import mjolnir from "../../resources/img/mjolnir.png";
 
 function RandomChar() {
   const [char, setChar] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  const marvelService = new MarvelService();
+  const { loading, error, getCharacter, clearError } = useMarvelService();
 
   useEffect(() => {
     updateChar();
@@ -23,23 +20,13 @@ function RandomChar() {
   }, []);
 
   const onCharLoaded = (char) => {
-    setLoading((loading) => false);
     setChar(char);
   };
 
-  const onCharLoading = () => {
-    setLoading((loading) => true);
-  };
-
-  const onError = () => {
-    setError((error) => true);
-    setLoading((loading) => false);
-  };
-
   const updateChar = () => {
+    clearError();
     const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
-    onCharLoading();
-    marvelService.getCharacter(id).then(onCharLoaded).catch(onError);
+    getCharacter(id).then(onCharLoaded);
   };
 
   const errorMessage = error ? <ErrorMessage /> : null;
@@ -70,15 +57,18 @@ function RandomChar() {
 function View({ char }) {
   const { name, description, thumbnail, homepage, wiki } = char;
 
-  let imgStyle = {'objectFit' : 'cover'};
-  if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
-      imgStyle = {'objectFit' : 'contain'};
+  let imgStyle = { objectFit: "cover" };
+  if (
+    thumbnail ===
+    "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+  ) {
+    imgStyle = { objectFit: "contain" };
   }
 
   return (
     <div className="randomchar__block">
       <img
-        src={thumbnail} 
+        src={thumbnail}
         alt="Random character"
         className="randomchar__img"
         style={imgStyle}

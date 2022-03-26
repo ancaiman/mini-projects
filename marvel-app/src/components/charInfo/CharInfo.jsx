@@ -3,16 +3,14 @@ import PropTypes from "prop-types";
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 import Skeleton from "../skeleton/Skeleton";
-import MarvelService from "../../services/MarvelService";
+import useMarvelService from "../../services/MarvelService";
 
 import "./charInfo.scss";
 
 function CharInfo(props) {
   const [char, setChar] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
 
-  const marvelService = new MarvelService();
+  const { loading, error, getCharacter, clearError } = useMarvelService();
 
   useEffect(() => {
     updateChar();
@@ -22,22 +20,12 @@ function CharInfo(props) {
     const { charId } = props;
     if (!charId) return;
 
-    onCharLoading();
-    marvelService.getCharacter(charId).then(onCharLoaded).catch(onError);
+    clearError();
+    getCharacter(charId).then(onCharLoaded);
   };
 
   const onCharLoaded = (char) => {
-    setLoading((loading) => false);
     setChar(char);
-  };
-
-  const onCharLoading = () => {
-    setLoading((loading) => true);
-  };
-
-  const onError = () => {
-    setError((error) => true);
-    setLoading((loading) => false);
   };
 
   const skeleton = char || loading || error ? null : <Skeleton />;
@@ -58,9 +46,12 @@ function CharInfo(props) {
 function View({ char }) {
   const { name, description, thumbnail, homepage, wiki, comics } = char;
 
-  let imgStyle = {'objectFit' : 'cover'};
-  if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
-      imgStyle = {'objectFit' : 'contain'};
+  let imgStyle = { objectFit: "cover" };
+  if (
+    thumbnail ===
+    "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+  ) {
+    imgStyle = { objectFit: "contain" };
   }
 
   return (
