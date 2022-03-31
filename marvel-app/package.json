@@ -1,5 +1,6 @@
 {
   "name": "marvel",
+  "homepage": "https://ancaiman.github.io/mini-projects/marvel-app/build/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
